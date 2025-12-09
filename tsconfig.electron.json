@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es2019",
+        "outDir": "dist-electron",
+        "sourceMap": true,
+        "strict": true,
+        "esModuleInterop": true
+    },
+    "include": [
+        "electron/**/*"
+    ]
+}

@@ -1,0 +1,26 @@
+.active-recipe-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(124, 92, 255, 0.1);
+    /* Accent color low opacity */
+    border: 1px solid var(--accent-color);
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 10px;
+    font-size: 12px;
+    color: var(--accent-color);
+}
+
+.clear-recipe-btn {
+    background: transparent;
+    color: var(--accent-color);
+    font-size: 18px;
+    line-height: 1;
+    padding: 0 4px;
+    opacity: 0.7;
+}
+
+.clear-recipe-btn:hover {
+    opacity: 1;
+}

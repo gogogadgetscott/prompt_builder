@@ -1,0 +1,102 @@
+.recipe-selector {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Search */
+.rs-search {
+    width: 100%;
+    background: var(--bg-input);
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    padding: 10px 12px;
+    color: var(--text-primary);
+    font-size: 13px;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.rs-search:focus {
+    border-color: var(--accent-color);
+}
+
+/* Tabs */
+.rs-tabs {
+    display: flex;
+    overflow-x: auto;
+    gap: 8px;
+    padding-bottom: 4px;
+    /* Hide scrollbar but keep functionality */
+    scrollbar-width: thin;
+}
+
+.rs-tab {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    padding: 6px 12px;
+    border-radius: 20px;
+    /* Pill shape */
+    font-size: 11px;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.rs-tab:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+.rs-tab.active {
+    background: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+/* Grid */
+.rs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    max-height: 200px;
+    /* Constraint height to reduce scrolling overlap */
+    overflow-y: auto;
+}
+
+.rs-card {
+    background-color: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 10px;
+    text-align: left;
+    transition: all 0.2s ease;
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.rs-card:hover {
+    background-color: var(--bg-hover);
+    border-color: var(--text-muted);
+}
+
+.rs-label {
+    font-weight: 500;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rs-empty {
+    grid-column: span 2;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 12px;
+    padding: 20px;
+}

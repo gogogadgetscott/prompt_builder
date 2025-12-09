@@ -1,0 +1,23 @@
+.prompt-input-wrapper {
+    background-color: var(--bg-input);
+    border-radius: var(--radius-md);
+    padding: 12px;
+    border: 1px solid transparent;
+    transition: border-color 0.2s;
+    flex: 1;
+    display: flex;
+}
+
+.prompt-input-wrapper:focus-within {
+    border-color: var(--accent-color);
+}
+
+.prompt-textarea {
+    width: 100%;
+    min-height: 100px;
+    background: transparent;
+    color: var(--text-primary);
+    font-size: 14px;
+    line-height: 1.5;
+    resize: none;
+}
