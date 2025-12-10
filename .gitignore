@@ -8,8 +8,12 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist
+# dist
+dist-electron
+release
+release-packager
 dist-ssr
+examples
 *.local
 
 # Editor directories and files
@@ -22,4 +26,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-examples/*

@@ -19,6 +19,7 @@ if (squirrelStartup) {
 let mainWindow = null;
 let geminiView = null;
 let chatgptView = null;
+let perplexityView = null;
 let activeView = 'gemini';
 const createWindow = () => {
     // Create the browser window.
@@ -47,6 +48,13 @@ const createWindow = () => {
             contextIsolation: true,
         }
     });
+    // Create BrowserView for Perplexity
+    perplexityView = new electron_1.BrowserView({
+        webPreferences: {
+            nodeIntegration: false,
+            contextIsolation: true,
+        }
+    });
     const bounds = mainWindow.getBounds();
     const sidebarWidth = 400;
     // Helper to resize views
@@ -62,18 +70,31 @@ const createWindow = () => {
             if (chatgptView)
                 chatgptView.setBounds({ ...viewBounds, y: halfHeight, height: b.height - halfHeight });
         }
+        else if (activeView === 'all') {
+            const thirdWidth = Math.floor(viewBounds.width / 3);
+            if (geminiView)
+                geminiView.setBounds({ ...viewBounds, width: thirdWidth });
+            if (chatgptView)
+                chatgptView.setBounds({ ...viewBounds, x: viewBounds.x + thirdWidth, width: thirdWidth });
+            if (perplexityView)
+                perplexityView.setBounds({ ...viewBounds, x: viewBounds.x + (thirdWidth * 2), width: viewBounds.width - (thirdWidth * 2) });
+        }
         else {
             if (geminiView)
                 geminiView.setBounds(viewBounds);
             if (chatgptView)
                 chatgptView.setBounds(viewBounds);
+            if (perplexityView)
+                perplexityView.setBounds(viewBounds);
         }
     };
     // Load URLs
     if (geminiView)
-        geminiView.webContents.loadURL('https://gemini.google.com/app');
+        geminiView.webContents.loadURL('https://gemini.google.com/');
     if (chatgptView)
-        chatgptView.webContents.loadURL('https://chat.openai.com/');
+        chatgptView.webContents.loadURL('https://chatgpt.com/');
+    if (perplexityView)
+        perplexityView.webContents.loadURL('https://www.perplexity.ai/');
     // Set initial view
     mainWindow.setBrowserView(geminiView);
     resizeViews();
@@ -91,28 +112,38 @@ const createWindow = () => {
 };
 // Automation Logic
 // View Switching
+// View Switching
 electron_1.ipcMain.on('set-view', (event, viewName) => {
     if (!mainWindow)
         return;
     activeView = viewName;
+    // Detach all first
+    mainWindow.setBrowserView(null);
+    // Re-attach based on view
     if (viewName === 'gemini' && geminiView) {
         mainWindow.setBrowserView(geminiView);
     }
     else if (viewName === 'chatgpt' && chatgptView) {
         mainWindow.setBrowserView(chatgptView);
     }
-    else if (viewName === 'split' && geminiView && chatgptView) {
-        // Remove first to reset? No, Electron supports multiple views via setBrowserView(deprecated) or addBrowserView
-        // Use addBrowserView to support multiple
-        mainWindow.setBrowserView(null);
-        mainWindow.addBrowserView(geminiView);
-        mainWindow.addBrowserView(chatgptView);
+    else if (viewName === 'perplexity' && perplexityView) {
+        mainWindow.setBrowserView(perplexityView);
+    }
+    else if (viewName === 'split') {
+        if (geminiView)
+            mainWindow.addBrowserView(geminiView);
+        if (chatgptView)
+            mainWindow.addBrowserView(chatgptView);
+    }
+    else if (viewName === 'all') {
+        if (geminiView)
+            mainWindow.addBrowserView(geminiView);
+        if (chatgptView)
+            mainWindow.addBrowserView(chatgptView);
+        if (perplexityView)
+            mainWindow.addBrowserView(perplexityView);
     }
     // Trigger resize to update layouts
-    // access resizeViews? It's inside createWindow. 
-    // We need to move resizeViews out or make it accessible.
-    // Ideally we emit an event or just call it if we can scope it.
-    // Quick fix: emit a resize event on the window to trigger the listener
     mainWindow.emit('resize');
 });
 // Automation Logic
@@ -200,14 +231,64 @@ electron_1.ipcMain.on('submit-prompt', (event, { text, target }) => {
             }
         })();
     `;
+    // PERPLEXITY INJECTION
+    const perplexityCode = `
+        (function() {
+            const findEditor = () => {
+                 const selectors = [
+                    'textarea[placeholder*="Ask"]',
+                    'textarea[placeholder*="anything"]', 
+                    'textarea',
+                    'div[contenteditable="true"]'
+                ];
+                for (const s of selectors) {
+                    const el = document.querySelector(s);
+                    if (el) return el;
+                }
+                return null;
+            };
+
+            const editor = findEditor();
+            if (editor) {
+                 editor.focus();
+                 
+                 // Check if it is a textarea or div
+                 if (editor.tagName.toLowerCase() === 'textarea') {
+                     editor.value = ${safeText};
+                     editor.dispatchEvent(new Event('input', { bubbles: true }));
+                 } else {
+                     // ContentEditable
+                     document.execCommand('insertText', false, ${safeText});
+                 }
+
+                 setTimeout(() => {
+                    // Perplexity submit button usually has an svg arrow or aria-label
+                    const sendBtn = document.querySelector('button[aria-label="Submit"]') || document.querySelector('button[aria-label="Ask"]');
+                    if (sendBtn) {
+                        sendBtn.click();
+                    } else {
+                        // Enter key fallback
+                        const enterEvent = new KeyboardEvent('keydown', { bubbles: true, cancelable: true, keyCode: 13, key: 'Enter' });
+                        editor.dispatchEvent(enterEvent);
+                    }
+                 }, 800);
+            } else {
+                console.error("Perplexity editor not found");
+            }
+        })();
+    `;
     // Execute based on target
-    if (target === 'gemini' || target === 'both') {
+    if (target === 'gemini' || target === 'both' || target === 'all') {
         if (geminiView)
             geminiView.webContents.executeJavaScript(geminiCode).catch(e => console.error("Gemini Injection failed", e));
     }
-    if (target === 'chatgpt' || target === 'both') {
+    if (target === 'chatgpt' || target === 'both' || target === 'all') {
         if (chatgptView)
             chatgptView.webContents.executeJavaScript(chatgptCode).catch(e => console.error("ChatGPT Injection failed", e));
+    }
+    if (target === 'perplexity' || target === 'all') {
+        if (perplexityView)
+            perplexityView.webContents.executeJavaScript(perplexityCode).catch(e => console.error("Perplexity Injection failed", e));
     }
 });
 electron_1.app.on('ready', createWindow);

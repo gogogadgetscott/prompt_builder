@@ -36,8 +36,8 @@ function App() {
   const [length, setLength] = useState('');
 
   // Multi-Model State
-  const [currentView, setCurrentView] = useState<'gemini' | 'chatgpt' | 'split'>('gemini');
-  const [target, setTarget] = useState<'gemini' | 'chatgpt' | 'both'>('gemini');
+  const [currentView, setCurrentView] = useState<'gemini' | 'chatgpt' | 'perplexity' | 'split' | 'all'>('gemini');
+  const [target, setTarget] = useState<'gemini' | 'chatgpt' | 'perplexity' | 'both' | 'all'>('gemini');
 
   useEffect(() => {
     // @ts-ignore
@@ -118,10 +118,22 @@ function App() {
               ChatGPT
             </button>
             <button
+              className={`view-btn ${currentView === 'perplexity' ? 'active' : ''}`}
+              onClick={() => setCurrentView('perplexity')}
+            >
+              Perplexity
+            </button>
+            <button
               className={`view-btn ${currentView === 'split' ? 'active' : ''}`}
               onClick={() => setCurrentView('split')}
             >
-              Split
+              Split (2)
+            </button>
+            <button
+              className={`view-btn ${currentView === 'all' ? 'active' : ''}`}
+              onClick={() => setCurrentView('all')}
+            >
+              All (3)
             </button>
           </div>
         )}
@@ -169,7 +181,9 @@ function App() {
               <select value={target} onChange={(e) => setTarget(e.target.value as any)}>
                 <option value="gemini">Gemini</option>
                 <option value="chatgpt">ChatGPT</option>
-                <option value="both">Both</option>
+                <option value="perplexity">Perplexity</option>
+                <option value="both">Split (G+C)</option>
+                <option value="all">All (G+C+P)</option>
               </select>
             </div>
             <button

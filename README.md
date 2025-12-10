@@ -1,73 +1,70 @@
-# React + TypeScript + Vite
+# Prompt Builder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Prompt Builder is a powerful desktop application designed to help you craft, optimize, and manage AI prompts effortlessly. Inspired by tools like the Logitech Prompt Builder, this application provides a streamlined interface for interacting with Large Language Models, specifically tailored for **Google Gemini**.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Prompt Recipes**: Pre-defined templates to quickly generate common prompt types (Summarize, Rephrase, Email, etc.).
+- **Customization**: Easily adjust the tone, length, and style of your prompts with a few clicks.
+- **Gemini Integration**: Built to work natively with Google's Gemini AI models.
+- **Desktop Experience**: Fast, responsive desktop application built with Electron.
 
-## React Compiler
+## precise Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend**: React, TypeScript, Vite, TailwindCSS (if applicable)
+- **Backend/Shell**: Electron
+- **Language**: TypeScript
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Prerequisites
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- [Node.js](https://nodejs.org/) (Latest LTS recommended)
+- [Git](https://git-scm.com/)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Installation
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd prompt_builder
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+## Development
+
+To start the application in development mode with hot-reloading:
+
+```bash
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+This will launch both the Vite dev server and the Electron app window.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Building the Application
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+There are two ways to build the application for distribution:
+
+### method 1: Portable Executable (Recommended)
+
+To create a portable folder containing the executable (uses `electron-packager`):
+
+```bash
+npm run pack
 ```
+**Output**: `release-packager/prompt_builder-win32-x64/prompt_builder.exe`
+
+### Method 2: Installer (NSIS)
+
+To create a standard Windows installer (uses `electron-builder`):
+
+```bash
+npm run package
+```
+**Output**: `release/Prompt Builder Setup <version>.exe`
+
+> **Note**: If you encounter network issues downloading build dependencies (like `winCodeSign`) with `electron-builder`, use Method 1.
