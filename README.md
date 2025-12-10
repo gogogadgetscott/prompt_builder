@@ -1,70 +1,64 @@
 # Prompt Builder
 
-Prompt Builder is a powerful desktop application designed to help you craft, optimize, and manage AI prompts effortlessly. Inspired by tools like the Logitech Prompt Builder, this application provides a streamlined interface for interacting with Large Language Models, specifically tailored for **Google Gemini**.
+<p align="center">
+  <img src="public/logo.png" alt="Prompt Builder Logo" width="150"/>
+</p>
 
-## Features
+![Build Status](https://img.shields.io/github/actions/workflow/status/gogogadgetscott/prompt_builder/ci.yml)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Version](https://img.shields.io/badge/version-0.1.0-green)
 
-- **Prompt Recipes**: Pre-defined templates to quickly generate common prompt types (Summarize, Rephrase, Email, etc.).
-- **Customization**: Easily adjust the tone, length, and style of your prompts with a few clicks.
-- **Gemini Integration**: Built to work natively with Google's Gemini AI models.
-- **Desktop Experience**: Fast, responsive desktop application built with Electron.
+**Prompt Builder** is an Electron-based desktop application designed to interactively build, test, and manage AI prompts. Whether you are crafting complex system instructions for ChatGPT, optimizing queries for Google Gemini, or organizing a library of reusable prompt templates, Prompt Builder streamlines the workflow.
 
-## precise Tech Stack
+## 🚀 Features
 
-- **Frontend**: React, TypeScript, Vite, TailwindCSS (if applicable)
-- **Backend/Shell**: Electron
-- **Language**: TypeScript
+*   **Interactive Prompt Building**: Visual interface to construct and edit prompts.
+*   **Multi-LLM Support**: Test prompts directly against Google Gemini (setup required) and other LLMs.
+*   **Cross-Platform**: Runs seamlessly on Windows, macOS, and Linux.
+*   **Template Management**: Save and organize your favorite prompt recipes.
+*   **Guest Mode**: Quick testing without complex API key setup for supported services.
 
-## Getting Started
+## 📦 Installation
 
-### Prerequisites
+Prerequisites: [Node.js](https://nodejs.org/) (v18+) and [Git](https://git-scm.com/).
 
-- [Node.js](https://nodejs.org/) (Latest LTS recommended)
-- [Git](https://git-scm.com/)
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/gogogadgetscott/prompt_builder.git
+    cd prompt_builder
+    ```
 
-### Installation
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
 
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   cd prompt_builder
-   ```
+3.  **Start the application:**
+    ```bash
+    npm run start
+    ```
+    *(Note: `npm run dev` is also available for development with hot-reload)*
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+## 🖼️ Usage
 
-## Development
+1.  **Launch the App**: Run `npm run start` to open the Prompt Builder window.
+2.  **Select a Mode**: Choose between different LLM contexts or the generic "Guest Mode" for quick testing.
+3.  **Build Your Prompt**: Use the editor to type your prompt. Use the sidebar to load saved "recipes" or templates.
+4.  **Test**: Click "Run" to test the prompt against the connected AI service (requires configuration).
 
-To start the application in development mode with hot-reloading:
+![App Interface](public/screenshot.png)
 
-```bash
-npm run dev
-```
+## 🤝 Contributing
 
-This will launch both the Vite dev server and the Electron app window.
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to submit pull requests, report issues, and verify your changes.
 
-## Building the Application
+## 🗺️ Roadmap
 
-There are two ways to build the application for distribution:
+Check out our [ROADMAP.md](ROADMAP.md) to see what's planned for future releases, including:
+*   Prompt Libraries
+*   VS Code Extension
+*   Community Sharing Features
 
-### method 1: Portable Executable (Recommended)
+## 📄 License
 
-To create a portable folder containing the executable (uses `electron-packager`):
-
-```bash
-npm run pack
-```
-**Output**: `release-packager/prompt_builder-win32-x64/prompt_builder.exe`
-
-### Method 2: Installer (NSIS)
-
-To create a standard Windows installer (uses `electron-builder`):
-
-```bash
-npm run package
-```
-**Output**: `release/Prompt Builder Setup <version>.exe`
-
-> **Note**: If you encounter network issues downloading build dependencies (like `winCodeSign`) with `electron-builder`, use Method 1.
+This project is licensed under the MIT License.

@@ -1,0 +1,20 @@
+[
+    {
+        "id": "email-pro",
+        "name": "Professional Email Rewriter",
+        "description": "Rewrite informal text into a professional email.",
+        "content": "You are a professional communication assistant. Rewrite the following text as a polite, concise, and professional email:\n\n[INSERT TEXT HERE]"
+    },
+    {
+        "id": "code-explain",
+        "name": "Code Explainer",
+        "description": "Explain complex code snippets in simple terms.",
+        "content": "Analyze the following code snippet and explain what it does in simple terms suitable for a junior developer. Highlight any potential performance issues:\n\n```\n[INSERT CODE HERE]\n```"
+    },
+    {
+        "id": "blog-outline",
+        "name": "Blog Post Outline",
+        "description": "Generate a structured outline for a blog post.",
+        "content": "Create a detailed outline for a blog post about [TOPIC]. Include a catchment title, introduction hook, 3 main section headers with bullet points, and a conclusion."
+    }
+]

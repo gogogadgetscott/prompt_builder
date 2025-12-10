@@ -13,6 +13,7 @@ export const Settings: React.FC<Props> = ({ recipes, onSave, onClose }) => {
     const [editLabel, setEditLabel] = useState('');
     const [editCategory, setEditCategory] = useState('');
     const [editTemplate, setEditTemplate] = useState('');
+    const [replaceExisting, setReplaceExisting] = useState(false);
 
     const handleEdit = (r: Recipe) => {
         setEditingId(r.id);
@@ -79,19 +80,16 @@ export const Settings: React.FC<Props> = ({ recipes, onSave, onClose }) => {
                     // Simple validation: check if items look like recipes
                     const valid = json.every(r => r.id && r.label && r.template);
                     if (valid) {
-                        if (confirm(`Import ${json.length} recipes? This will append to your current list.`)) {
-                            // Merge strategy: Append with new IDs to avoid collision or keep IDs?
-                            // Let's keep IDs but filter out exact ID matches to avoid duplicate keys error
-                            // actually simpler: just append and if ID exists, maybe suffix it? 
-                            // OR just filter out existing IDs from import
-
-
-                            // For simplicity: We will just concat everything. 
-                            // React/Keys might complain if duplicate IDs. 
-                            // Let's regenerate IDs for imported items to be safe
+                        const action = replaceExisting ? 'REPLACE your current list' : 'append to your current list';
+                        if (confirm(`Import ${json.length} recipes? This will ${action}.`)) {
+                            // We will regenerate IDs for imported items to be safe
                             const imported = json.map((r: Recipe) => ({ ...r, id: `imported_${Date.now()}_${Math.random().toString(36).substr(2, 9)}` }));
 
-                            onSave([...recipes, ...imported]);
+                            if (replaceExisting) {
+                                onSave(imported);
+                            } else {
+                                onSave([...recipes, ...imported]);
+                            }
                             alert('Recipes imported successfully!');
                         }
                     } else {
@@ -114,7 +112,15 @@ export const Settings: React.FC<Props> = ({ recipes, onSave, onClose }) => {
         <div className="settings-container">
             <div className="settings-header">
                 <h2>Manage Recipes</h2>
-                <div style={{ display: 'flex', gap: '8px' }}>
+                <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '12px', cursor: 'pointer' }}>
+                        <input
+                            type="checkbox"
+                            checked={replaceExisting}
+                            onChange={(e) => setReplaceExisting(e.target.checked)}
+                        />
+                        Replace existing
+                    </label>
                     <label className="action-btn-secondary">
                         Import
                         <input type="file" accept=".json" onChange={handleImport} style={{ display: 'none' }} />

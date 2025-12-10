@@ -1,0 +1,98 @@
+[
+  {
+    "id": "reply_architect",
+    "label": "Reply Architect",
+    "template": "Goal: To draft a response to a complex inquiry quickly.\n\nPrompt: \"Draft a response to this email refusing the request for [Specific Item] but offering [Alternative Option] instead. Keep the tone collaborative and future-focused.\"",
+    "category": "Communication"
+  },
+  {
+    "id": "excel_formula_chef",
+    "label": "Excel Formula Chef",
+    "template": "Goal: To solve spreadsheet headaches without searching online.\n\nPrompt: \"I have a spreadsheet where Column A is [Date] and Column B is [Revenue]. Write an Excel formula to calculate the total revenue for the month of November.\"",
+    "category": "Data"
+  },
+  {
+    "id": "rephrase",
+    "label": "Rephrase",
+    "template": "Rephrase the following text:",
+    "category": "Editing"
+  },
+  {
+    "id": "polite",
+    "label": "Polite",
+    "template": "Make this text sound more professional:",
+    "category": "Editing"
+  },
+  {
+    "id": "tone_checker",
+    "label": "Tone Checker",
+    "template": "Goal: To ensure a difficult email strikes the right balance between firm and polite.\n\nPrompt: \"I need to send an email to [Client/Employee] regarding [Issue]. Here is my rough draft: '[Insert Draft]'. Please rewrite this to be more [professional/empathetic/assertive] and correct any grammar errors.\"",
+    "category": "Editing"
+  },
+  {
+    "id": "bullet_points",
+    "label": "Bullet Points",
+    "template": "Convert this text into bullet points:",
+    "category": "Formatting"
+  },
+  {
+    "id": "short_story",
+    "label": "Short Story",
+    "template": "Create a random short story about:",
+    "category": "Creative"
+  },
+  {
+    "id": "interview_coach",
+    "label": "Interview Coach",
+    "template": "Goal: To prepare for a performance review or negotiation.\n\nPrompt: \"I am negotiating for a budget increase. Simulate a conversation where you play the skeptical CFO and I play the Department Head. Ask me tough questions.\"",
+    "category": "Career"
+  },
+  {
+    "id": "tldr_generator",
+    "label": "TL;DR Generator",
+    "template": "Goal: To quickly digest long reports or email threads.\n\nPrompt: \"Summarize the following text into 3 key bullet points and list any immediate action items required of me: '[Insert Text]'.\"",
+    "category": "Reading"
+  },
+  {
+    "id": "summarize",
+    "label": "Summarize",
+    "template": "Summarize this text:",
+    "category": "Reading"
+  },
+  {
+    "id": "instant_agenda",
+    "label": "Instant Agenda",
+    "template": "Goal: To turn a vague meeting idea into a structured plan.\n\nPrompt: \"Create a 30-minute meeting agenda for a [Topic, e.g., Q3 Marketing Review]. Include time slots for a status update, blocker identification, and next steps.\"",
+    "category": "Productivity"
+  },
+  {
+    "id": "action_item_extractor",
+    "label": "Action Item Extractor",
+    "template": "Goal: To process messy meeting notes into a to-do list.\n\nPrompt: \"Here are the rough notes from our meeting: '[Insert Notes]'. Please organize these into a table with columns for: Task, Owner, and Deadline.\"",
+    "category": "Productivity"
+  },
+  {
+    "id": "devils_advocate",
+    "label": "Devil’s Advocate",
+    "template": "Goal: To stress-test a business decision before presenting it.\n\nPrompt: \"I am planning to [Strategic Move, e.g., launch a new service]. Act as a critical stakeholder and give me 3 reasons why this might fail, and how I can mitigate those risks.\"",
+    "category": "Strategy"
+  },
+  {
+    "id": "jargon_simplifier",
+    "label": "Jargon Simplifier",
+    "template": "Goal: To understand a complex technical concept or industry trend.\n\nPrompt: \"Explain [Concept, e.g., Blockchain/Supply Chain Logistics] to me as if I were a 5th grader, then explain its relevance to [Your Industry].\"",
+    "category": "Learning"
+  },
+  {
+    "id": "skill_sprint_plan",
+    "label": "Skill Sprint Plan",
+    "template": "Goal: To learn a new soft or hard skill quickly.\n\nPrompt: \"Create a 4-week learning plan for me to improve my [Skill, e.g., Public Speaking]. Break it down into daily 15-minute exercises.\"",
+    "category": "Learning"
+  },
+  {
+    "id": "proposal_outliner",
+    "label": "Proposal Outliner",
+    "template": "Goal: To overcome writer's block when starting a new project.\n\nPrompt: \"Create a detailed outline for a business proposal regarding [Project Name]. Include sections for Executive Summary, Problem Statement, Solution, Pricing, and Timeline.\"",
+    "category": "Writing"
+  }
+]
